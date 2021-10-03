@@ -66,14 +66,14 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address: 'mail3.mbcradio.net',
-    port: 2525,
-    domain: 'mbcradio.net',
+    address: 'zimbra-server.bliimo.com',
+    port: 465,
+    domain: 'bliimotechnologies.com',
     authentication: 'plain',
-    tls: false,
-    user_name: 'no-reply@rorens.com',
-    password: '9fqW5q6GCK2KMtN',
-    enable_starttls_auto: false
+    tls: true,
+    user_name: 'dev-test-email@bliimotechnologies.com',
+    password: 'wZV2frghc68XmEvC',
+    enable_starttls_auto: true
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
