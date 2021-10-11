@@ -1,2 +1,12 @@
-<h3>Dashboard</h3>
-<%= Rails.env %>
+<div class="container bg-white py-3 px-5 shadow mt-5 rounded">
+  <br>
+  <% if current_user.verified_at.present? %>
+    <h3 class="text-dark">Welcome</h3>
+    <hr>
+    <p>Your account is now verified.</p>
+  <% else %>
+    <h3 class="text-dark">You're not yet verified. Your account is currently in review.</h3>
+    <hr>
+    <p>This will take up to 2 working days for the administrator to verify your account.</p>
+  <% end %>
+</div>

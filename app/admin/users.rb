@@ -43,16 +43,13 @@ ActiveAdmin.register User do
   index do
     selectable_column
     id_column
-    column :email
-    column :contact_number
     column "Name", :first_name do |user|
       user.name
     end
+    column :email
+    column :contact_number
     column :verified do |user|
       status_tag user.verified?
-    end
-    column :status do |user|
-      status_tag user.status
     end
     actions
   end   
@@ -109,9 +106,6 @@ ActiveAdmin.register User do
                       a "Verify", href: verify_admin_user_path(user.id), "data-method": :post, rel: 'nofollow', class: 'text-success'
                     end
                   end
-                end
-                row :status do
-                  status_tag user.status.present? ? user.status : 'Inactive'
                 end
               end
             end

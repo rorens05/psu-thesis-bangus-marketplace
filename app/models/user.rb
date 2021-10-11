@@ -5,9 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
-  belongs_to :region
-  belongs_to :province
-  belongs_to :city
+  belongs_to :region, optional: true
+  belongs_to :province, optional: true
+  belongs_to :city, optional: true
   has_many :accounts, dependent: :destroy
   has_many :transactions, through: :accounts
 
@@ -20,13 +20,16 @@ class User < ApplicationRecord
   enum online_status: %w[Offline Online]
   enum login_type: %w[Email Facebook Google Apple]
 
-
   # validates :confirmation_token, presence: true, uniqueness: { case_sensitive: false }
   # validates :username, presence: true, uniqueness: { case_sensitive: false }
-  # validates :contact_number, presence: true
-  # validates :first_name, presence: true
-  # validates :last_name, presence: true
-  # validates :birthday, presence: true
+  validates :contact_number, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :birthday, presence: true
+  validates :middle_name, presence: true
+  validates :gender, presence: true
+  validates :address, presence: true
+  validates :image, presence: true
 
   def verified?
     verified_at.present? ? "Verified" : "Unverified"

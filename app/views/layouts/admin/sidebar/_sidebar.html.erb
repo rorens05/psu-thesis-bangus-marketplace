@@ -4,8 +4,10 @@
   </div>
   <div class='accordion mt-3' id='accordion'>
     <%= render 'layouts/admin/links/dashboard_link' %>
-    <%= render 'layouts/admin/links/message_link' %>
-    <%= render 'layouts/admin/links/profile_link' %>
+    <% if current_user.verified? == "Verified" %>
+      <%= render 'layouts/admin/links/message_link' %>
+      <%= render 'layouts/admin/links/profile_link' %>
+    <% end %>
     <hr/>
     <div class='px-3 link-container '>
       <%= link_to(destroy_user_session_path, method: :delete, class: 'w-100 d-flex align-items-center text-align-left py-2', data: { confirm: 'Are you sure?' } ) do %>
