@@ -1,5 +1,6 @@
 ActiveAdmin.register_page "VersionManager" do
-  menu parent: ["Settings"], priority: 1, label: "Version Manager"
+  menu false
+  # menu parent: ["Settings"], priority: 1, label: "Version Manager"
 
   page_action :update, method: :post do
     mobile_release_params = params[:mobile_release]

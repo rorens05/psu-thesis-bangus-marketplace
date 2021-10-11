@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_30_151731) do
+ActiveRecord::Schema.define(version: 2021_10_03_131747) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -97,6 +97,19 @@ ActiveRecord::Schema.define(version: 2021_09_30_151731) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["province_id"], name: "index_cities_on_province_id"
+  end
+
+  create_table "master_lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.decimal "share_capital", precision: 10
+    t.decimal "withdrawal", precision: 10
+    t.decimal "balance", precision: 10
+    t.decimal "membership_fee", precision: 10
+    t.decimal "consolidation", precision: 10
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_master_lists_on_user_id"
   end
 
   create_table "mobile_releases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -188,6 +201,7 @@ ActiveRecord::Schema.define(version: 2021_09_30_151731) do
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "provinces"
+  add_foreign_key "master_lists", "users"
   add_foreign_key "provinces", "regions"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"

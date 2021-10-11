@@ -11,7 +11,7 @@ class AdminUser < ApplicationRecord
   has_one_attached :image
 
   enum status: ["Active", "Inactive"]
-  enum role: ["Super Admin", "Admin", "DJ"]
+  enum role: ["Super Admin", "Admin"]
 
   scope :djs, -> { where(:role => "DJ")}
   # Ex:- scope :active, -> {where(:active => true)}

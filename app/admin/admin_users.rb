@@ -1,5 +1,5 @@
-ActiveAdmin.register AdminUser do
-  menu parent: 'Users'
+ActiveAdmin.register AdminUser, as: "Admins" do
+  menu priority: 11
   permit_params :email, :name, :role, :status, :password, :password_confirmation, :image
 
   index do

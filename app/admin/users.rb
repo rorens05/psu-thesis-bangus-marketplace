@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu parent: 'Users', label: "End Users"
+  menu priority: 10
 
   permit_params :email, 
                 :username, 
@@ -44,25 +44,9 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :email
-    column :username
     column :contact_number
     column "Name", :first_name do |user|
       user.name
-    end
-    column :gender
-    column :online_status do |user|
-      if user.online_status == "Online"
-        status_tag user.online_status
-      else
-        if user.last_online.present?
-          span "Last online: #{format_date user.last_online} #{format_time user.last_online}"
-        else
-          status_tag user.online_status
-        end
-      end
-    end
-    column :login_type do |user|
-      status_tag user.login_type
     end
     column :verified do |user|
       status_tag user.verified?
@@ -98,9 +82,6 @@ ActiveAdmin.register User do
   show do
     panel user.name do
       tabs do
-        tab 'Summary' do
-          render 'admin/charts/summary', user: user
-        end
         tab 'General Information' do
           columns do
             column span: 3 do
@@ -132,12 +113,6 @@ ActiveAdmin.register User do
                 row :status do
                   status_tag user.status.present? ? user.status : 'Inactive'
                 end
-                row :online_status do
-                  status_tag user.online_status
-                  if user.online_status == "Offline" && user.last_online.present?
-                    span "Last online: #{format_time user.last_online} #{format_date user.last_online}"
-                  end
-                end
               end
             end
             if user.image.attached?
@@ -147,25 +122,7 @@ ActiveAdmin.register User do
             end
           end
         end
-        tab 'Login Information' do
-          attributes_table_for user do
-            row :token do 
-              span user.token 
-              br
-              a "Logout", href: logged_out_admin_user_path(user.id), "data-method": :post, rel: 'nofollow', class: 'text-success'
-            end
-            row :last_login
-            row :manufacturer
-            row :device_id
-            row :device_name
-            row :brand
-            row :ip_address
-            row :model
-            row :mac_address
-            row :carrier
-            row :system_version
-          end
-        end
+       
       end
     end
   end
