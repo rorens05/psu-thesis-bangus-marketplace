@@ -10,15 +10,20 @@ class User < ApplicationRecord
   belongs_to :city, optional: true
   has_many :accounts, dependent: :destroy
   has_many :transactions, through: :accounts
+  has_many :master_lists, dependent: :destroy
+
+  has_many :messages, dependent: :destroy
 
   has_one_attached :image
   before_validation :generate_confirmation_token
+
+  scope :unverified_users, -> { where(:verified_at => nil)}
 
   enum gender: %w[Male Female Undisclosed]
   enum role: %w[Player]
   enum status: %w[Active Inactive]
   enum online_status: %w[Offline Online]
-  enum login_type: %w[Email Facebook Google Apple]
+  enum login_type: %w[Email Fa'cebook Google Apple]
 
   # validates :confirmation_token, presence: true, uniqueness: { case_sensitive: false }
   # validates :username, presence: true, uniqueness: { case_sensitive: false }
@@ -37,6 +42,13 @@ class User < ApplicationRecord
   
   def image_path
     return Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) if image.attached?
+  end
+
+  def age
+    return 0 if birthday.nil?
+    now = Time.now.utc.to_date
+    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+
   end
 
   def editable

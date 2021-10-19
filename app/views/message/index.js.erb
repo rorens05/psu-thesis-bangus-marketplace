@@ -1,0 +1,56 @@
+<% if @messages.count.zero? %>
+  <p>No messages found...</p>
+<% end %>
+<% @messages.each do |message| %>
+  <div>
+    <% if message.sender == "admin_user" %>
+      <div class="recipient-message">
+        <% if message.admin_user.image.attached? %>
+          <%= image_tag message.admin_user.image, class: 'message-avatar'  %>
+        <% else %>
+          <div class="message-avatar">
+            <%= message.admin_user.name.upcase[0] %>
+          </div>
+        <% end %>
+        <div class="message-content">
+          <% if message.attachment.attached? %>
+            <div class="attachment-container">
+              <a href="<%= url_for(message.attachment) %>" download> <i class="fas fa-paperclip"></i> <%= "Download attachment" %></a>
+            </div>
+          <% end %>
+          <div class="value">
+            <%= message.content %>
+          </div>
+          <div class="date text-secondary">
+            <small> <%= "#{format_time(message.created_at)} #{format_date(message.created_at)}" %></small>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="sender-message">
+        <% if message.user.image.attached? %>
+          <%= image_tag message.user.image, class: 'message-avatar'  %>
+        <% else %>
+          <div class="message-avatar">
+            <%= message.user.name.upcase[0] %>
+          </div>
+        <% end %>
+        <div class="message-content">
+          <% if message.attachment.attached? %>
+            <div class="attachment-container">
+              <a href="<%= url_for(message.attachment) %>" download> <i class="fas fa-paperclip"></i> <%= "Download attachment" %></a>
+            </div>
+          <% end %>
+          <% if message.content.present? %>
+            <div class="value">
+              <%= message.content %>
+            </div>
+          <% end %>
+          <div class="date text-right text-secondary">
+            <small> <%= "#{format_time(message.created_at)} #{format_date(message.created_at)}" %></small>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

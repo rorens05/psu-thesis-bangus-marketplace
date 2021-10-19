@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_11_122443) do
+ActiveRecord::Schema.define(version: 2021_10_11_135557) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -112,6 +112,17 @@ ActiveRecord::Schema.define(version: 2021_10_11_122443) do
     t.index ["user_id"], name: "index_master_lists_on_user_id"
   end
 
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "admin_user_id", null: false
+    t.bigint "user_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "sender"
+    t.index ["admin_user_id"], name: "index_messages_on_admin_user_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "mobile_releases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "build_code"
     t.integer "update_type"
@@ -204,6 +215,8 @@ ActiveRecord::Schema.define(version: 2021_10_11_122443) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cities", "provinces"
   add_foreign_key "master_lists", "users"
+  add_foreign_key "messages", "admin_users"
+  add_foreign_key "messages", "users"
   add_foreign_key "provinces", "regions"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"

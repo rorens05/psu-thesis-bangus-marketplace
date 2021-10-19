@@ -91,11 +91,6 @@ ActiveAdmin.register User do
                 row :last_name 
                 row :gender 
                 row :birthday 
-                row :role 
-                row :country
-                row :region
-                row :province
-                row :city
                 row :verified_at do 
                   div do
                     if user.verified_at.present?

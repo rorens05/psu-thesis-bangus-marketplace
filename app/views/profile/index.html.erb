@@ -1,0 +1,76 @@
+<div class="container mt-5 shadow rounded bg-white py-5 px-4">
+  <div class="row">
+    <div class="col-sm-3">
+      <% if current_user.image.attached? %>
+        <%= image_tag current_user.image, class: 'w-100 rounded' %>
+      <% else %>
+        <%= image_tag "/images/no-image.png", class: 'w-100 rounded' %>
+      <% end %>
+    </div>
+    <div class="col-sm-9">
+      <h3><%= current_user.name %></h3>
+      <hr>
+      <table class="table custom-table">
+        <tr>
+          <th>First Name</th>
+          <td><%= current_user.first_name %></td>
+        </tr>
+        <tr>
+          <th>Last Name</th>
+          <td><%= current_user.last_name %></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td><%= current_user.username %></td>
+        </tr>
+        <tr>
+          <th>Gender</th>
+          <td><%= current_user.gender %></td>
+        </tr>
+        <tr>
+          <th>Birthday</th>
+          <td><%= current_user.birthday %></td>
+        </tr>
+        <tr>
+          <th>Age</th>
+          <td><%= current_user.age %></td>
+        </tr>
+        <tr>
+          <th>Verified</th>
+          <td><%= current_user.verified_at.present? ? "Verified" : "Unverified" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <h3 class="mt-4">Master Lists</h3>
+  <table class="table custom-table">
+    <thead>
+      <tr>
+        <th>Share Capital</th>
+        <th>Withdrawal</th>
+        <th>Balance</th>
+        <th>Membership Fee</th>
+        <th>Consolidation</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.master_lists.each do |master_list| %>
+        <tr>
+          <td><%= format_currency master_list.share_capital %></td>
+          <td><%= format_currency master_list.withdrawal %></td>
+          <td><%= format_currency master_list.balance %></td>
+          <td><%= format_currency master_list.membership_fee %></td>
+          <td><%= format_currency master_list.consolidation %></td>
+          <td><%= master_list.status %></td>
+          <td><%= format_date master_list.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

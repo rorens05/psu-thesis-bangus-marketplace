@@ -1,0 +1,101 @@
+<div class="container px-3">
+  <div class="bg-white py-3 px-5 shadow mt-5 rounded">
+    <br>
+    <% if current_user.verified_at.present? %>
+      <h3 class="text-dark">Messages</h3>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <% @admins.each do |admin| %>
+            <a href="<%= "/message?admin_user_id=#{admin.id}" %>">
+              <div class="w-100 d-flex align-items-center px-2 py-3 mb-2 border rounded <%= params[:admin_user_id] == admin.id.to_s ? "message-item-active" : "" %>">
+                <% if admin.image.attached? %>
+                  <%= image_tag admin.image, class: 'message-avatar'  %>
+                <% else %>
+                  <div class="message-avatar">
+                    <%= admin.name.upcase[0] %>
+                  </div>
+                <% end %>
+                <b><%= admin.name %></b>
+              </div>
+            </a>
+          <% end %>
+        </div>
+        <div class="col-sm-9">
+          <div class="message-container border p-3" id="message-container">
+            <% if @messages.count.zero? %>
+              <p>No messages found...</p>
+            <% end %>
+            <% @messages.each do |message| %>
+              <div>
+                <% if message.sender == "admin_user" %>
+                  <div class="recipient-message">
+                    <% if message.admin_user.image.attached? %>
+                      <%= image_tag message.admin_user.image, class: 'message-avatar'  %>
+                    <% else %>
+                      <div class="message-avatar">
+                        <%= message.admin_user.name.upcase[0] %>
+                      </div>
+                    <% end %>
+                    <div class="message-content">
+                      <% if message.attachment.attached? %>
+                        <div class="attachment-container">
+                          <a href="<%= url_for(message.attachment) %>" download> <i class="fas fa-paperclip"></i> <%= "Download attachment" %></a>
+                        </div>
+                      <% end %>
+                      <div class="value">
+                        <%= message.content %>
+                      </div>
+                      <div class="date text-secondary">
+                        <small> <%= "#{format_time(message.created_at)} #{format_date(message.created_at)}" %></small>
+                      </div>
+                    </div>
+                  </div>
+                <% else %>
+                  <div class="sender-message">
+                    <% if message.user.image.attached? %>
+                      <%= image_tag message.user.image, class: 'message-avatar'  %>
+                    <% else %>
+                      <div class="message-avatar">
+                        <%= message.user.name.upcase[0] %>
+                      </div>
+                    <% end %>
+                    <div class="message-content">
+                      <% if message.attachment.attached? %>
+                        <div class="attachment-container">
+                          <a href="<%= url_for(message.attachment) %>" download> <i class="fas fa-paperclip"></i> <%= "Download attachment" %></a>
+                        </div>
+                      <% end %>
+                      <% if message.content.present? %>
+                        <div class="value">
+                          <%= message.content %>
+                        </div>
+                      <% end %>
+                      <div class="date text-right text-secondary">
+                        <small> <%= "#{format_time(message.created_at)} #{format_date(message.created_at)}" %></small>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <div class="input-message mt-3">
+            <%= simple_form_for(Message.new, url: "/message/create", html: { method: :post }, local: true) do |f| %>
+              <%= f.hidden_field :admin_user_id, value: @admin.id %>
+              <%= f.input :attachment %>
+              <div class="d-flex align-item-center mt-3">
+                <input type="text" class="form-control" id="message" placeholder="Message.." name="content">
+                <button type="submit" class="btn btn-primary ml-3"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <h3 class="text-dark">You're not yet verified. Your account is currently in review.</h3>
+      <hr>
+      <p>This will take up to 2 working days for the administrator to verify your account.</p>
+    <% end %>
+  </div>
+</div>

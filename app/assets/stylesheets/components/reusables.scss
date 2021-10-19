@@ -1,7 +1,77 @@
-.text-center{
+@import "components/constants";
+.text-center {
   text-align: center;
 }
 
-.m-0{
+.m-0 {
   margin: 0 !important;
+}
+
+.container .row {
+  display: flex;
+  .col-sm-3 {
+    flex: 1;
+    margin-right: 12px;
+  }
+  .col-sm-9 {
+    flex: 4;
+  }
+}
+
+.border {
+  border: 1px solid rgb(220, 220, 220);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.px-2 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.py-3 {
+  padding-bottom: 12px;
+  padding-top: 12px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.rounded {
+  border-radius: 4px;
+}
+
+.p-3 {
+  padding: 12px;
+}
+.mt-3 {
+  margin-top: 12px;
+}
+.ml-3 {
+  margin-left: 12px;
+}
+
+.file.optional {
+  display: block;
+}
+
+.align-item-center {
+  align-items: center;
+}
+
+.btn.btn-primary {
+  background-color: $primary_color;
+  color: white;
+  outline: none !important;
+  border-radius: 4px;
+  border: none !important;
+  padding: 10px !important;
+  font-size: 12px;
 }

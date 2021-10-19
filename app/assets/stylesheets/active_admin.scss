@@ -260,3 +260,69 @@
 .index {
   background-color: #eff0ff;
 }
+
+// message
+.message-item-active {
+  border: 1px solid $primary_color !important;
+}
+
+.message-container {
+  height: 55vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+
+  .recipient-message {
+    display: flex;
+    flex-direction: row;
+    .message-content {
+      max-width: 400px;
+      .value {
+        color: black;
+        background-color: rgb(220, 220, 220);
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+      margin-right: 8px;
+      .attachment-container {
+        width: 100%;
+      }
+    }
+  }
+  .sender-message {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 16px;
+    .message-content {
+      max-width: 400px;
+      .value {
+        color: white;
+        background-color: $primary_color;
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+      margin-right: 8px;
+      .attachment-container {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.input-message {
+}
+
+.message-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary_color;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin-right: 8px;
+  object-fit: cover;
+}

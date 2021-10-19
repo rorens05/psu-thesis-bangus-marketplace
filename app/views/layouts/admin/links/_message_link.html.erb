@@ -1,22 +1,22 @@
-<div class='px-3 link-container <%= @navigation_name == "buyer" ? 'active' : '' %>'>
+<div class='px-3 link-container <%= @navigation_name == "message" ? 'active' : '' %>'>
   <a
     class='w-100 d-flex align-items-center text-align-left py-2'
     href='#'
     data-toggle='collapse'
-    data-target='#buyer'
+    data-target='#message'
     aria-expanded='true'
-    aria-controls='buyer'
+    aria-controls='message'
   >
     <i class="fas fa-comment-alt mr-3 icon"></i>
     Messages
   </a>
   <div
-    id='buyer'
+    id='message'
     class='collapse px-5'
     aria-labelledby='headingOne'
     data-parent='#accordion'
   >
-    <a href="/messages" class='d-block pl-2 pb-3'>
+    <a href="/message" class='d-block pl-2 pb-3'>
       All
     </a>
   </div>
