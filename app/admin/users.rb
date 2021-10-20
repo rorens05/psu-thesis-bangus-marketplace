@@ -18,6 +18,7 @@ ActiveAdmin.register User do
                 :province_id,
                 :city_id
 
+
   member_action :verify, method: :post do
     resource.verified_at = DateTime.now
     resource.save

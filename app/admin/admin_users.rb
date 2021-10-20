@@ -15,12 +15,12 @@ ActiveAdmin.register AdminUser, as: "Admins" do
     actions
   end
 
-  filter :email
-  filter :role, as: :select
-  filter :status, as: :select
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
+  # filter :email
+  # filter :role, as: :select
+  # filter :status, as: :select
+  # filter :current_sign_in_at
+  # filter :sign_in_count
+  # filter :created_at
 
   form do |f|
     f.inputs do
