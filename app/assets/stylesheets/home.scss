@@ -56,6 +56,7 @@ a {
         width: 60%;
         display: block;
         margin: 8px auto;
+        border-radius: 100px;
       }
     }
 
@@ -104,8 +105,9 @@ a {
   .content {
     width: 100%;
     overflow: auto;
-    background-color: #272727;
+    // background-color: #272727;
 
+    background-image: url("/images/bg.png");
     label {
       color: rgb(179, 179, 179);
     }
@@ -402,4 +404,15 @@ pre.console-prompt-display {
   color: white;
   margin-right: 8px;
   object-fit: cover;
+}
+
+.login-page {
+  background-image: url("/images/bg.png");
+  height: 100vh;
+  overflow: auto;
+}
+
+.register-link {
+  display: block !important;
+  text-align: center;
 }

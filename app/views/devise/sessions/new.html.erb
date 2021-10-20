@@ -3,14 +3,13 @@
     <div class="row">
       <div class="col-md-6 d-none d-md-block py-5 px-2 px-md-5">
         <div class="heading-container">
-          <h1>Rorens</h1>
-          <p class="mt-5">Proident veniam tempor mollit esse nostrud eiusmod quis velit aute nulla deserunt excepteur nisi velit. Nulla consectetur commodo et id magna velit culpa amet commodo consequat qui. Minim veniam velit nisi est. Aute culpa aliqua eu dolore ea ex commodo cillum incididunt. Enim ut culpa nisi veniam ipsum ea occaecat consequat aute et. Id commodo non exercitation velit consectetur ea laborum sint consectetur commodo laboris magna. Laboris ipsum aute et est veniam amet.</p>
+          <h1 class="text-white">Thesis</h1>
+          <p class="mt-5 text-white">This is a long description</p>
         </div>
       </div>
       <div class="col-md-6 py-5 px-2 px-md-5">
-        <div class="login-container px-4 py-5 bg-dark rounded shadow">
-          <h4 class="text-center mt-3 text-white">Log in</h4>
-          <p class="text-center mt-3 text-white"><%= ENV['RAILS_ENV'] %> build</p>
+        <div class="login-container px-4 py-5 bg-white rounded shadow">
+          <h3 class="text-center mt-3 ">LOGIN</h3>
           <hr/>
           <% if alert.present? %>
             <p class="text-danger"><%= alert %></p>
@@ -32,6 +31,8 @@
             <div class="form-actions">
               <%= f.button :submit, "Log in", class: 'btn btn-primary rounded-pill px-5 d-block mx-auto' %>
             </div>
+            <p class="text-center mt-3">or</p>
+            <a class="register-link" href="/users/sign_up">Register</a>
           <% end %>
         </div>
       </div>
@@ -43,7 +44,7 @@
       </div>
     </div>
     <div class="login-footer">
-      <p class="text-center text-white">© 2020, rorens</p>
+      <p class="text-center text-white">© 2020, THESIS</p>
     </div>
   </div>
 </div>
