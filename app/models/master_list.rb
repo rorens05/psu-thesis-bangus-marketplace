@@ -4,7 +4,7 @@ class MasterList < ApplicationRecord
   enum status: ["Active", "Inactive"]
 
   def balance_of_share_capital
-    (share_capital || 0) + (withdrawal || 0)
+    (share_capital || 0) - (withdrawal || 0)
   end
 
   def status_of_share_capital

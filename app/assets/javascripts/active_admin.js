@@ -65,4 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch((err) => console.log({ err }));
     }, 3000);
   }
+
+  if (window.location.pathname == "/admin/login") {
+    document.querySelector("#active_admin_content").classList.add('login-bg')
+    // document.querySelector("h2").firstChild[0].innerHTML = "Laurence"
+  }
 });
