@@ -326,3 +326,14 @@
   margin-right: 8px;
   object-fit: cover;
 }
+
+.dashboard {
+  h3 {
+    margin: 4px !important;
+    text-align: center;
+  }
+}
+
+#active_admin_content {
+  background-color: rgb(137, 161, 255) !important;
+}

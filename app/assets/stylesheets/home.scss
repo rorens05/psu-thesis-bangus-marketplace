@@ -408,6 +408,11 @@ pre.console-prompt-display {
 
 .login-page {
   background-image: url("/images/bg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 100vw 100vh;
+
   height: 100vh;
   overflow: auto;
 }
@@ -415,4 +420,14 @@ pre.console-prompt-display {
 .register-link {
   display: block !important;
   text-align: center;
+}
+
+.login-container {
+  margin-top: 50px !important;
+  margin-left: 60 !important;
+  margin-right: -60 !important;
+}
+
+.registration-container {
+  max-width: 600px !important;
 }

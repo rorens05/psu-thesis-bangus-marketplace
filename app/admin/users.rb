@@ -16,7 +16,11 @@ ActiveAdmin.register User do
                 :country,
                 :region_id,
                 :province_id,
-                :city_id
+                :city_id,
+                :sss,
+                :tin,
+                :philhealth,
+                :pag_ibig
 
 
   member_action :verify, method: :post do
@@ -72,6 +76,11 @@ ActiveAdmin.register User do
     f.input :birthday
     f.input :role
     f.input :status
+    
+    f.input :sss
+    f.input :tin
+    f.input :philhealth
+    f.input :pag_ibig
     f.input :password
     f.input :password_confirmation
     f.actions
@@ -92,6 +101,10 @@ ActiveAdmin.register User do
                 row :last_name 
                 row :gender 
                 row :birthday 
+                row :sss
+                row :tin
+                row :philhealth
+                row :pag_ibig
                 row :verified_at do 
                   div do
                     if user.verified_at.present?
