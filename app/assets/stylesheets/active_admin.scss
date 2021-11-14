@@ -12,16 +12,21 @@
   &.verified,
   &.online,
   &.ready,
+  &.regular,
+  &.membership_fee,
   &.income {
     background-color: green;
   }
   &.inactive,
   &.unverified,
   &.google,
+  &.withdrawal,
   &.expense {
     background-color: red;
   }
-  &.in_progress {
+  &.in_progress,
+  &.capital_share,
+  &.associate {
     background-color: orange;
   }
   &.email,
@@ -29,6 +34,7 @@
     background-color: rgb(135, 135, 135);
   }
   &.facebook,
+  &.consolidation,
   &.pending {
     background-color: blue;
   }
