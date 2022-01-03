@@ -34,14 +34,6 @@ Rails.application.routes.draw do
   resources :option_groups do
     end
   resources :variations
-  resources :products do
-        member do
-      post :upload_image
-      post :add_tags
-      delete :delete_tag
-      delete :delete_image
-    end
-  end
   resources :categories
   resources :merchants do
       member do
@@ -57,9 +49,20 @@ Rails.application.routes.draw do
 
   get 'profile', to: 'profile#index'
   get 'profile/change_password'
+  get 'profile/edit_profile'
+  post 'profile/update_profile'
   patch 'profile/update_password'
   devise_for :users
   get 'users/:id' => 'users#show'
+  get 'products/:id' => 'home#products', as: :home_product
+  get 'cart' => 'home#cart', as: :home_cart
+  get 'about' => 'home#about', as: :about
+  get 'orders' => 'home#orders', as: :orders
+  get 'orders/cancel/:id' => 'home#cancel_order', as: :cancel_order
+  post 'products/:id/review' => 'home#review', as: :update_home_product_review
+  post 'products/:id/add_to_cart' => 'home#add_to_cart', as: :add_to_cart
+  get 'cart/:id/destroy' => 'home#destroy_cart', as: :destroy_cart
+  post 'checkout' => 'home#checkout', as: :checkout
   get 'home/index'
   root 'home#index'
 

@@ -1,0 +1,57 @@
+<div class="container-fluid bg-white">
+  <div class="container main-page">
+    <h1 class="h1 pt-5">Cart</h1>
+    <% if current_user.carts.count.zero?  %>
+      <p>Items in your cart will appear here...</p>
+    <% end %>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="carts pt-3">
+          <% current_user.carts.each do |cart| %>
+            <div class="cart border p-3 rounded shadow mb-3">
+              <div class="row">
+                <div class="col-md-2">
+                  <% if cart.product.image.attached? %>
+                    <%= image_tag cart.product.image %>
+                  <% else %>
+                    <%= image_tag "/images/no-image.png" %>
+                  <% end %>
+                </div>
+                <div class="col-md-8">
+                  <h4 class="h4"><%= cart.product.name %></h4>
+                  <p><%= cart.product.description %></p>
+                </div>
+                <div class="col-md-2 text-right">
+                  <h4 class="text-danger h5"><%= format_currency cart.price %></h4>
+                  <p >Quantity: <%= cart.quantity %></p>
+                  <a href="<%= "/cart/#{cart.id}/destroy" %>" >
+                    <i class="fa fa-trash text-secondary"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% if current_user.carts.count.positive?  %>
+        <div class="col-sm-4">
+          <div class="cart-total p-3 mt-3 bg-white rounded border">
+            <h4 class="h4">Cart Total</h4>
+            <%= simple_form_for(@order, url: checkout_path, method: "POST") do |f| %>
+              <div class="form-inputs">
+                <%= f.input :address, input_html: {value: @order.address ||current_user.address} %>
+                <%= f.input :contact_number, input_html: {value: @order.contact_number || current_user.contact_number} %>
+                <%= f.input :note, as: :text %>
+              </div>
+              <hr/>
+              <h5 class="text-secondary my-3 h4 text-danger">Subtotal: <%= format_currency current_user.carts.subtotal %></h5>
+              <div class="form-actions">
+                <%= f.button :submit, "Checkout", class: 'btn btn-primary w-100' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

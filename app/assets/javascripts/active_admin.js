@@ -1,4 +1,6 @@
-//= require arctic_admin/base
+//= require active_admin/base
+//= require active_material
+
 //= require select2
 //= require select2-full
 //= require jquery

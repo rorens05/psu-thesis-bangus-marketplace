@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
-
+gem "active_material", github: "vigetlabs/active_material"
+gem 'bootstrap-sass'
+gem 'active_bootstrap_skin'
 # for creating beautiful charts
 gem "chartkick"
 # datetime picker for active admin

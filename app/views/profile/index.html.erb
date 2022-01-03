@@ -13,64 +13,35 @@
       <table class="table custom-table">
         <tr>
           <th>First Name</th>
-          <td><%= current_user.first_name %></td>
+          <td class="text-dark"><%= current_user.first_name %></td>
         </tr>
         <tr>
           <th>Last Name</th>
-          <td><%= current_user.last_name %></td>
+          <td class="text-dark"><%= current_user.last_name %></td>
         </tr>
         <tr>
           <th>Email</th>
-          <td><%= current_user.email %></td>
-        </tr>
-        <tr>
-          <th>Username</th>
-          <td><%= current_user.username %></td>
+          <td class="text-dark"><%= current_user.email %></td>
         </tr>
         <tr>
           <th>Gender</th>
-          <td><%= current_user.gender %></td>
+          <td class="text-dark"><%= current_user.gender %></td>
         </tr>
         <tr>
           <th>Birthday</th>
-          <td><%= current_user.birthday %></td>
+          <td class="text-dark"><%= current_user.birthday %></td>
         </tr>
         <tr>
-          <th>Age</th>
-          <td><%= current_user.age %></td>
+          <th>Address</th>
+          <td class="text-dark"><%= current_user.address %></td>
         </tr>
         <tr>
-          <th>Verified</th>
-          <td><%= current_user.verified_at.present? ? "Verified" : "Unverified" %></td>
+          <th>Contact Number</th>
+          <td class="text-dark"><%= current_user.contact_number %></td>
         </tr>
       </table>
+      <a href="/profile/edit_profile" class="btn btn-primary">Edit profile</a>
+      <a href="/profile/change_password" class="btn btn-primary">Change Password</a>
     </div>
   </div>
-  <h3 class="mt-4">Master Lists</h3>
-  <table class="table custom-table">
-    <thead>
-      <tr>
-        <th>Share Capital</th>
-        <th>Withdrawal</th>
-        <th>Balance</th>
-        <th>Membership Fee</th>
-        <th>Consolidation</th>
-        <th>Status</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% current_user.master_lists.each do |master_list| %>
-        <tr>
-          <td><%= format_currency master_list.share_capital %></td>
-          <td><%= format_currency master_list.withdrawal %></td>
-          <td><%= format_currency master_list.balance %></td>
-          <td><%= format_currency master_list.membership_fee %></td>
-          <td><%= format_currency master_list.consolidation %></td>
-          <td><%= master_list.status %></td>
-          <td><%= format_date master_list.created_at %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 </div>

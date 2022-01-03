@@ -34,9 +34,38 @@ class ProfileController < ApplicationController
 
   def index
   end
+
+  def edit_profile
+    @user = current_user
+  end
+
+  def update_profile
+    @user = current_user
+
+    if @user.update(profile_params)
+      redirect_to "/profile", notice: "Profile updated successfully"
+    else
+      render :edit_profile
+    end
+  end
   
   private
   def set_navigation_name 
     @navigation_name = "Profile"
+  end
+
+  def profile_params 
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :middle_name,
+      :birthday,
+      :gender,
+      :user_type,
+      :address,
+      :contact_number,
+      :email
+    )
+
   end
 end

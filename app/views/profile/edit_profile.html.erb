@@ -1,0 +1,45 @@
+<div class="container mt-5 shadow rounded bg-white py-3 px-4">
+  <h3 class="mt-4 mb-3 h2">Edit profile</h3>
+  <%= simple_form_for(@user, url: profile_update_profile_path, method: :post) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+      <%= f.input :image,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :first_name,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :last_name,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :middle_name,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :birthday, html5: true,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :gender,
+                  as: :select,
+                  include_blank: false,
+                  collection: User.genders.keys,
+                  autofocus: true %>
+      <%= f.input :user_type,
+                  as: :select,
+                  include_blank: false,
+                  collection: User.user_types.keys,
+                  autofocus: true %>
+      <%= f.input :address,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :contact_number,
+                  autofocus: true,
+                  required: true %>
+      <%= f.input :email,
+                  required: true,
+                  input_html: { autocomplete: "email" }%>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Update Profile", class: 'py-2' %>
+    </div>
+  <% end %>
+</div>

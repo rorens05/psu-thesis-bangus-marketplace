@@ -1,12 +1,30 @@
-<div class="container bg-white py-3 px-5  shadow mt-5 rounded">
-  <br>
-  <% if current_user.verified_at.present? %>
-    <h3 class="text-dark">Welcome</h3>
-    <hr>
-    <p>Your account is now verified.</p>
-  <% else %>
-    <h3 class="text-dark">You're not yet verified. Your account is currently in review.</h3>
-    <hr>
-    <p>This will take up to 3-7 working days for the administrator to verify your account. We will contact you immediately after verification.</p>
-  <% end %>
+<div class="container-fluid bg-white">
+  <div class="container main-page pt-3">
+    <%# <form class="form-inline py-2">
+      <div class="form-group d-flex"  style="width: 100%">
+        <input type="password" class="form-control" style="flex: 1" id="inputPassword2" placeholder="Search" >
+        <button type="submit" class="btn btn-primary mx-2" >Search</button>
+      </div>
+    </form> %>
+    <div class="container grid-container">
+      <% Product.all.each do |product| %>
+        <a href="/products/<%= product.id %>" class="card-link text-reset text-decoration-none">
+          <div class="card" style="">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, class: 'card-img-top' %>
+            <% else %>
+              <%= image_tag '/images/no-image.png', class: 'card-img-top' %>
+            <% end %>
+            <div class="card-body d-flex flex-column justify-content-between" style="height: 180px">
+              <div>
+                <h5 class="card-title h5"><%= product.name %></h5>
+                <p class="card-text"><%= product.description %></p>
+              </div>
+              <p class="card-text h4 text-danger"><%= format_currency current_user.user_type == "individual" ? product.price : product.wholesale_price %></p>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
 </div>

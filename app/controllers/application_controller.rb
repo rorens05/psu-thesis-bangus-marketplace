@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
       :sss,
       :tin,
       :philhealth,
-      :pag_ibig,
+      :user_type,
   ])
   end
 

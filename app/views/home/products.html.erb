@@ -1,0 +1,90 @@
+<div class="container-fluid bg-white">
+  <div class="container main-page">
+    <form class="form-inline py-2 mx-3 mb-3">
+      <div class="form-group d-flex"  style="width: 100%">
+        <input type="text" class="form-control" style="flex: 1" id="inputPassword2" placeholder="Search" >
+        <button type="submit" class="btn btn-primary mx-2" >Search</button>
+      </div>
+    </form>
+    <div class="row shadow mx-3">
+      <div class="col-sm-3 bg-white">
+        <div class="">
+          <% if @product.image.attached? %>
+            <%= image_tag @product.image, class: 'w-100', style: "height: 200px !important; object-fit: cover" %>
+          <% else %>
+            <%= image_tag '/images/no-image.png', class: 'w-100', style: "height: 200px !important; object-fit: cover" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-5 px-0 bg-white">
+        <div class=" p-3">
+          <h1 class="text-dark h3"><%= @product.name %></h1>
+          <hr>
+          <h1 class="text-dark p mt-4"><%= @product.description %></h1>
+          <% if current_user.user_type != 'individual' %>
+            <h1 class="text-dark p mt-4">
+              <span class="font-weight-bold">Wholesale minimum quantity: </span>
+              <%= @product.wholesale_minimum_quantity %></h1>
+          <% end %>
+          <h1 class="text-dark h1 mt-4 text-danger"><%= format_currency current_user.user_type == "individual" ? @product.price : @product.wholesale_price %></h1>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class=" p-3">
+          <%= simple_form_for(@cart, url: add_to_cart_path, method: :post) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <%= f.input :quantity %>
+            </div>
+            <div class="form-actions">
+              <%= f.button :submit, "ADD TO CART", class: 'btn btn-lg btn-info text-white text-decoration-none w-100' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <h1 class="text-dark h3">Reviews</h1>
+      <hr>
+      <br>
+      <% if @product.reviews.count.zero? %>
+        <p class="text-dark">No reviews yet</p>
+         <br>
+      <% end %>
+      <% @product.reviews.each do |review| %>
+        <div class="shadow p-3 mb-3">
+          <div class="row">
+            <div class="col-sm-2 text-center">
+              <% if review.user.image.attached? %>
+                <%= image_tag review.user.image, class: 'w-100 border', style: "height: 100px; width: 100px !important; object-fit: cover; border-radius: 50px; border" %>
+              <% else %>
+                <%= image_tag '/images/no-image.png', class: 'w-100 border', style: "height: 100px; width: 100px !important; object-fit: cover; border-radius: 50px; border" %>
+              <% end %>
+            </div>
+            <div class="col-sm-10">
+              <div class=" p-3">
+                <h5 class="text-dark h5"><%= review.user.name %></h5>
+                <hr><br>
+                <%= render 'rating_star', rating: review.rating %>
+                <h1 class="text-dark p"><%= review.review %></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <hr/>
+      <br>
+      <h2 class="text-dark h3"><%=  @review.new_record? ? "Add Review" : "Update Review"  %></h2>
+      <%= simple_form_for(@review, url: update_home_product_review_path, method: :post) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :rating %>
+          <%= f.input :review, as: :text %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, @review.new_record? ? "Add Review" : "Update Review" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

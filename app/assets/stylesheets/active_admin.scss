@@ -2,7 +2,9 @@
 @import "components/switch";
 @import "components/reusables";
 @import "components/admin";
-@import "arctic_admin/base";
+
+@import "active_material";
+
 @import "select2";
 @import "select2-bootstrap";
 @import "active_admin_datetimepicker";
@@ -10,6 +12,7 @@
 .status_tag {
   &.active,
   &.verified,
+  &.individual,
   &.online,
   &.ready,
   &.regular,
@@ -20,6 +23,7 @@
   &.inactive,
   &.unverified,
   &.google,
+  &.enterprise,
   &.withdrawal,
   &.expense {
     background-color: red;
@@ -230,116 +234,93 @@
   display: none;
 }
 
-.header-item#tabs {
-  border-right: 10px solid #4554ff;
-  background-color: #a0a9f4;
+.columns {
+  display: flex !important;
+}
 
-  .menu_item {
-    &.current {
-      a {
-        background-color: #4554ff !important;
-        color: white;
-      }
-    }
-    a {
-      color: black;
-      text-transform: capitalize;
-      font-weight: bold;
-      &:hover {
-        background-color: #4554ff !important;
-        color: white;
-      }
-    }
+.product-index-image {
+  height: 120px !important;
+  width: 120px !important;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 2px 2px 10px rgb(230, 230, 230);
+}
 
-    .menu {
-      background-color: #a0a9f4 !important;
-    }
+.product-show-image {
+  display: block;
+  margin: 0 auto;
+  width: 90%;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 2px 2px 10px rgb(230, 230, 230);
+}
+
+.select.input {
+  select {
+    width: 100%;
   }
 }
 
-.site_title,
-.header-item {
-  border-bottom: 3px solid #4554ff !important;
-  background-color: #a0a9f4 !important;
-}
-
-.index {
-  background-color: #eff0ff;
-}
-
-// message
-.message-item-active {
-  border: 1px solid $primary_color !important;
-}
-
-.message-container {
-  height: 55vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column-reverse;
-
-  .recipient-message {
-    display: flex;
-    flex-direction: row;
-    .message-content {
-      max-width: 400px;
-      .value {
-        color: black;
-        background-color: rgb(220, 220, 220);
-        padding: 4px 12px;
-        border-radius: 8px;
-      }
-      margin-right: 8px;
-      .attachment-container {
-        width: 100%;
-      }
-    }
-  }
-  .sender-message {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 16px;
-    .message-content {
-      max-width: 400px;
-      .value {
-        color: white;
-        background-color: $primary_color;
-        padding: 4px 12px;
-        border-radius: 8px;
-      }
-      margin-right: 8px;
-      .attachment-container {
-        width: 100%;
-      }
-    }
-  }
-}
-
-.input-message {
-}
-
-.message-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $primary_color;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  margin-right: 8px;
+.card-img-top {
+  height: 200px !important;
   object-fit: cover;
 }
 
-.dashboard {
-  h3 {
-    margin: 4px !important;
-    text-align: center;
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
+  grid-gap: 20px 10px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.card-link {
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
-.login-bg {
-  background-color: rgb(179, 190, 255) !important;
+.main-page {
+  min-height: calc(100vh - 50px);
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
+.carts {
+  img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid rgb(197, 197, 197);
+  }
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: rgb(73, 73, 73);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  &.pending {
+    background-color: rgb(4, 0, 255);
+  }
+  &.processing {
+    background-color: rgb(0, 159, 199);
+  }
+  &.shipping {
+    background-color: orange;
+  }
+  &.completed {
+    background-color: green;
+  }
+  &.cancelled {
+    background-color: red;
+  }
 }

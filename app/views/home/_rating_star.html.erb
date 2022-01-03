@@ -1,0 +1,9 @@
+<div class="rating mb-2">
+  <% for i in 1..5 do %>
+    <% if i <= rating %>
+      <i class="fa fa-star text-warning"></i>
+    <% else %>
+      <i class="fa fa-star text-secondary"></i>
+    <% end %>
+  <% end %>
+</div>

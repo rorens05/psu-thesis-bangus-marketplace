@@ -65,4 +65,5 @@ module ApplicationHelper
       currency
     end
   end
+
 end

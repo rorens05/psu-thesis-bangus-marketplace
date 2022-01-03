@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV['DB_NAME'] || "psu_dev" %>
+  database: <%= ENV['DB_NAME'] || "thesis_03" %>
   username: <%= ENV['DB_USER'] || "username" %>
   password: <%= ENV['DB_PASSWORD'] || "password" %>
   host:     <%= ENV['DB_HOST'] || "localhost" %>

@@ -107,13 +107,12 @@ a {
     overflow: auto;
     // background-color: #272727;
 
-    background-image: url("/images/bg.png");
+    // background-image: url("/images/bg.png");
     label {
       color: rgb(179, 179, 179);
     }
 
     span {
-      color: whitesmoke;
     }
 
     p.reset {
@@ -407,7 +406,7 @@ pre.console-prompt-display {
 }
 
 .login-page {
-  background-image: url("/images/bg.png");
+  // background-image: url("/images/bg.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

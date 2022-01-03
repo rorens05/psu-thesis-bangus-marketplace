@@ -1,8 +1,9 @@
 ActiveAdmin.register User do
-  menu priority: 10
+  menu parent: "Customer", priority: 10
 
   permit_params :email, 
                 :username, 
+                :user_type, 
                 :contact_number, 
                 :first_name, 
                 :last_name, 
@@ -53,8 +54,8 @@ ActiveAdmin.register User do
     end
     column :email
     column :contact_number
-    column :verified do |user|
-      status_tag user.verified?
+    column :user_type do |user|
+      status_tag user.user_type
     end
     actions
   end   
@@ -68,19 +69,11 @@ ActiveAdmin.register User do
     f.input :first_name
     f.input :last_name
     f.input :email
-    f.input :country, as: :string
+    f.input :user_type
     f.input :gender
-    f.input :region
-    f.input :province
-    f.input :city
-    f.input :birthday
-    f.input :role
+    f.input :birthday, as: :date_picker
     f.input :status
     
-    f.input :sss
-    f.input :tin
-    f.input :philhealth
-    f.input :pag_ibig
     f.input :password
     f.input :password_confirmation
     f.actions
@@ -89,7 +82,7 @@ ActiveAdmin.register User do
   show do
     panel user.name do
       tabs do
-        tab 'General Information' do
+        tab '' do
           columns do
             column span: 3 do
               attributes_table_for user do
@@ -101,21 +94,10 @@ ActiveAdmin.register User do
                 row :last_name 
                 row :gender 
                 row :birthday 
-                row :sss
-                row :tin
-                row :philhealth
-                row :pag_ibig
-                row :verified_at do 
-                  div do
-                    if user.verified_at.present?
-                      status_tag user.verified?
-                      a "Unverify", href: unverify_admin_user_path(user.id), "data-method": :post, rel: 'nofollow', class: 'text-danger'
-                    else
-                      status_tag user.verified?
-                      a "Verify", href: verify_admin_user_path(user.id), "data-method": :post, rel: 'nofollow', class: 'text-success'
-                    end
-                  end
+                row :user_type do 
+                  status_tag user.user_type
                 end
+               
               end
             end
             if user.image.attached?
