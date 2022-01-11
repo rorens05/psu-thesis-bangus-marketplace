@@ -6,6 +6,10 @@ class HomeController < ApplicationController
     # redirect_to admin_dashboard_path
   end
 
+  def product
+
+  end
+
   def products
     @product = Product.find(params[:id])
     @review = Review.find_by(product_id: params[:id], user_id: current_user.id) || Review.new

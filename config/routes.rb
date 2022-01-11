@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'cart/:id/destroy' => 'home#destroy_cart', as: :destroy_cart
   post 'checkout' => 'home#checkout', as: :checkout
   get 'home/index'
+  get 'products' => 'home#product'
   root 'home#index'
 
   get 'confirm_email/:token', to: 'email_handler#confirm_email'
