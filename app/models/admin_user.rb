@@ -29,7 +29,7 @@ class AdminUser < ApplicationRecord
 
   def send_otp_mail
     Rails.logger.info "Sending OTP mail to #{email}"
-    Rails.logger.info "Sending OTP: #{otp}"
+    Rails.logger.info "Sending OTP: #{otp_code}"
     AdminMailer.user_otp(email, otp_code).deliver_now
   end
 
