@@ -3,6 +3,7 @@ module AdminUsers
     class OtpAuthenticationsController < ActiveAdmin::Devise::SessionsController
       # prepend_before_action -> { authenticate_admin_user!(force: true) }
       skip_before_action :require_no_authentication
+
       def new
         return unless otp_sent?
         current_admin_user.send_otp_mail
@@ -15,7 +16,8 @@ module AdminUsers
           redirect_to admin_dashboard_path
         else
           # set invalid OTP flash message
-          render :new, alert('Invalid OTP')
+          flash.alert = "Invalid OTP."
+          render :new
         end
       end
 

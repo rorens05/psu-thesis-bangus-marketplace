@@ -10,11 +10,14 @@ class ApplicationController < ActionController::Base
       :tin,
       :philhealth,
       :user_type,
-  ])
+    ])
   end
 
   def authenticate_current_admin_user_with_otp!
-    return if controller_name == "otp_authentications" || controller_name == "sessions" || current_admin_user.otp_authenticated?
+
+    return if controller_name == "otp_authentications" || 
+              ActiveAdmin::Devise.controllers.keys.include?(controller_name.to_sym) || 
+              current_admin_user.otp_authenticated?
 
     redirect_to(admin_otp_page_path)
   end

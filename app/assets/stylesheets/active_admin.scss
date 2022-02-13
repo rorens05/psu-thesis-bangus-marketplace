@@ -369,6 +369,30 @@
   }
 }
 
+.otp-container {
+  display: block;
+  background-color: white;
+  width: 400px;
+  padding: 16px;
+  margin: auto;
+
+  .alert {
+    color: red;
+  }
+
+  input {
+    display: block;
+  }
+  input#otp {
+    width: 100%;
+    padding: 8px;
+    margin: 4px;
+  }
+  h2 {
+    padding: 4px;
+  }
+}
+
 @media print {
   /* All your print styles go here */
   .print-hidden {

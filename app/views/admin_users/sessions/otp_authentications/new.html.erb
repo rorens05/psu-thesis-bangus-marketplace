@@ -1,9 +1,13 @@
-<%= form_tag admin_verify_otp_path do %>
-  <h2>Enter OTP</h2>
-  <h2>Please check your email for the OTP</h2>
-  <%= text_field_tag 'otp', nil, options = { placeholder: 'One Time Password', size: '6', maxlength: '6' } %>
-  <%= text_field_tag(:email, current_admin_user.email) %>
-  <%= submit_tag 'Submit OTP' %>
-  <%= link_to 'Resend OTP', admin_otp_page_path %>
-  <%= link_to 'Logout', destroy_admin_user_session_path %>
-<% end %>
+<div class="otp-container">
+  <%= form_tag admin_verify_otp_path do %>
+    <h2>Enter OTP</h2>
+    <h2>Please check your email for the OTP</h2>
+    <h2 class="alert"><%= flash.alert %></h2>
+    <%= text_field_tag 'otp', nil, options = { placeholder: 'One Time Password', size: '6', maxlength: '6' } %>
+    <%= hidden_field_tag(:email, current_admin_user.email) %>
+    <%= submit_tag 'Submit OTP' %>
+    <%= link_to 'Resend OTP', admin_otp_page_path %>
+    <br/>
+    <%= link_to 'Logout', destroy_admin_user_session_path %>
+  <% end %>
+</div>
