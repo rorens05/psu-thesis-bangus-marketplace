@@ -9,6 +9,11 @@
 @import "select2-bootstrap";
 @import "active_admin_datetimepicker";
 
+@font-face {
+  font-family: peace_sans;
+  src: url("/fonts/Peace Sans Webfont.ttf");
+}
+
 .status_tag {
   &.active,
   &.verified,
@@ -16,6 +21,8 @@
   &.online,
   &.ready,
   &.regular,
+  &.best_seller,
+  &.completed,
   &.membership_fee,
   &.income {
     background-color: green;
@@ -25,11 +32,14 @@
   &.google,
   &.enterprise,
   &.withdrawal,
+  &.cancelled,
   &.expense {
     background-color: red;
   }
+  &.featured,
   &.in_progress,
   &.capital_share,
+  &.shipping,
   &.associate {
     background-color: orange;
   }
@@ -38,12 +48,16 @@
     background-color: rgb(135, 135, 135);
   }
   &.facebook,
+  &.popular,
   &.consolidation,
   &.pending {
     background-color: blue;
   }
   &.apple {
     background-color: rgb(0, 0, 0);
+  }
+  &.processing {
+    background-color: cyan;
   }
 }
 
@@ -278,6 +292,7 @@
   &:hover {
     transform: scale(1.1);
   }
+  max-width: 250px;
 }
 
 .main-page {
@@ -322,5 +337,41 @@
   }
   &.cancelled {
     background-color: red;
+  }
+}
+
+.panel_contents {
+  padding: 16px;
+}
+
+.product-description,
+.product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.formtastic {
+  padding-top: 16px;
+}
+
+.receipt-table {
+  border: 1px solid black;
+  color: black;
+  tr,
+  td {
+    color: black !important;
+    border: 1px solid black;
+    padding: 4px;
+  }
+}
+
+@media print {
+  /* All your print styles go here */
+  .print-hidden {
+    display: none;
   }
 }

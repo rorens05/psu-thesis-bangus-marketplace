@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   get 'cart/:id/destroy' => 'home#destroy_cart', as: :destroy_cart
   post 'checkout' => 'home#checkout', as: :checkout
   get 'home/index'
+  get 'receipt/:id' => 'home#receipt'
   get 'products' => 'home#product'
   root 'home#index'
 
@@ -86,9 +87,7 @@ Rails.application.routes.draw do
       post 'auth/change_password'
       patch 'profile/update_profile'
       get 'latest_version' => 'version_checker#latest_version'
-      
       resources :notifications, only: [:index]
-
       resources :locations do 
         collection do
           get :regions

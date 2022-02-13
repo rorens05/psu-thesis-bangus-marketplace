@@ -45,10 +45,12 @@
                   </div>
                 <% end %>
               </div>
-              <h3 class="h6"><span style="display: inline-block; width: 100px">Note:</span> <%= order.note.present? ? order.note : "No note available" %></h3>
-              <h3 class="h6"><span style="display: inline-block; width: 100px">Address:</span> <%= order.address %></h3>
-              <h3 class="h6"><span style="display: inline-block; width: 100px">Contact:</span> <%= order.contact_number %></h3>
-              <h3 class="h5 text-danger"><span style="display: inline-block; width: 100px">Total:</span> <%= format_currency order.price %></h3>
+              <h3 class="h6"><span style="display: inline-block; width: 150px">Note:</span> <%= order.note.present? ? order.note : "No note available" %></h3>
+              <h3 class="h6"><span style="display: inline-block; width: 150px">Address:</span> <%= order.address %></h3>
+              <h3 class="h6"><span style="display: inline-block; width: 150px">Contact:</span> <%= order.contact_number %></h3>
+              <h3 class="h6"><span style="display: inline-block; width: 150px">Delivery Method: </span> PICKUP</h3>
+              <h3 class="h5 text-danger"><span style="display: inline-block; width: 150px">Total:</span> <%= format_currency order.price %></h3>
+              <a href="/receipt/<%= order.id %>" target="_blank" class="btn btn-sm btn-primary" style="text-decoration: none !important">View Receipt</a>
             </div>
           <% end %>
         </div>

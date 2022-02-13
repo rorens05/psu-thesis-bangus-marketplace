@@ -1,0 +1,50 @@
+<div class="border" style="width: 500px; margin: 20px auto">
+  <table class="receipt-table" style="width: 100%; ">
+    <tr>
+      <td colspan="5">
+        <p style="text-align: center; font-weight: bold; font-size: 18px"><img src="/images/logo.jpg" style="width: 40px; margin-right: 12px"/> Malinamnam Fish Products</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="5" style="text-align: center; font-weight: bold; font-size: 24px;padding: 12px; auto"><%= @order.reference_number %></td>
+    </tr>
+    <tr>
+      <td colspan="2" >Order date: <%= format_date @order.created_at %></td>
+      <td>Order id: <%= @order.id %></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="font-weight: bold">ORDERS</td>
+    </tr>
+    <% @order.order_items.each do |order_item| %>
+      <tr>
+        <td style="font-weight: bold"><%= order_item.product.name %> (<%= format_currency order_item.price %>)</td>
+        <td style="font-weight: bold">Quantity: <%= order_item.quantity %>x</td>
+        <td style="font-weight: bold">Total: <%= format_currency order_item.price * order_item.quantity %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="5" style="">Address: <b><%= @order.address %></b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="">Contact Number: <b><%= @order.contact_number %></b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="">Note: <b><%= @order.note %></b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="">Delivery Method: <b><%= "PICKUP" %></b></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="padding: 12px"></td>
+    </tr>
+    <tr>
+      <td colspan="5" style="">
+        <p class="margin: 0 !important">From: Malinamnam Fish Products</p>
+        <p class="margin: 0 !important">Linoc Binmaley Pangasinan</p>
+      </td>
+    </tr>
+  </table>
+</div>
+<p class="text-center">
+  <a href="javascript:window.print();" class="text-center btn btn-info text-white print-hidden">Print Page</a>
+</p>

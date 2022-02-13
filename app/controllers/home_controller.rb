@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index, :about]
   layout 'dashboard'
 
   def index;
@@ -8,6 +8,11 @@ class HomeController < ApplicationController
 
   def product
 
+  end
+
+  def receipt
+    @no_navbar = true
+    @order = Order.find(params[:id])
   end
 
   def products
@@ -34,8 +39,7 @@ class HomeController < ApplicationController
     @review = Review.find_by(product_id: params[:id], user_id: current_user.id) || Review.new(product_id: params[:id], user_id: current_user.id)
     @cart = Cart.find_by(product_id: params[:id], user_id: current_user.id) || Cart.new(product_id: params[:id], user_id: current_user.id)
     @cart.quantity = params[:cart][:quantity]
-    @cart.price = current_user.user_type == "individual" ? @product.price : @product.wholesale_price
-    
+    @cart.price = @cart.quantity.to_s < @product.wholesale_minimum_quantity ? @product.price : @product.wholesale_price
     
     if current_user.user_type != "individual"
       if @cart.quantity.present? &&  @cart.quantity < @product.wholesale_minimum_quantity.to_i

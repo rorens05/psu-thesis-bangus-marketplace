@@ -1,7 +1,7 @@
 ActiveAdmin.register Order do
-
+  config.filters = false 
   permit_params :user_id, :status, :note, :contact_number, :address
- 
+
   index do
     column :reference_number do |item|
       link_to item.reference_number, admin_order_path(item)
@@ -25,6 +25,9 @@ ActiveAdmin.register Order do
         end
         row :note
         row :contact_number
+        row :price do |item|
+          format_currency item.price
+        end
         row :created_at
         row :updated_at
       end

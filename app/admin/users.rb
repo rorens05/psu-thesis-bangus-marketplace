@@ -1,11 +1,16 @@
 ActiveAdmin.register User do
   menu parent: "Customer", priority: 10
 
+  filter :first_name
+  filter :last_name
+  filter :email
+
   permit_params :email, 
                 :username, 
                 :user_type, 
                 :contact_number, 
                 :first_name, 
+                :middle_name, 
                 :last_name, 
                 :gender, 
                 :birthday, 
@@ -21,7 +26,8 @@ ActiveAdmin.register User do
                 :sss,
                 :tin,
                 :philhealth,
-                :pag_ibig
+                :pag_ibig,
+                :address
 
 
   member_action :verify, method: :post do
@@ -48,15 +54,14 @@ ActiveAdmin.register User do
 
   index do
     selectable_column
-    id_column
     column "Name", :first_name do |user|
       user.name
     end
     column :email
     column :contact_number
-    column :user_type do |user|
-      status_tag user.user_type
-    end
+    # column :user_type do |user|
+    #   status_tag user.user_type
+    # end
     actions
   end   
   
@@ -66,10 +71,12 @@ ActiveAdmin.register User do
 
     f.input :username
     f.input :contact_number
+    f.input :address
     f.input :first_name
+    f.input :middle_name
     f.input :last_name
     f.input :email
-    f.input :user_type
+    # f.input :user_type
     f.input :gender
     f.input :birthday, as: :date_picker
     f.input :status
@@ -90,13 +97,15 @@ ActiveAdmin.register User do
                 row :email
                 row :username
                 row :contact_number 
+                row :address 
                 row :first_name 
+                row :middle_name 
                 row :last_name 
                 row :gender 
                 row :birthday 
-                row :user_type do 
-                  status_tag user.user_type
-                end
+                # row :user_type do 
+                #   status_tag user.user_type
+                # end
                
               end
             end
@@ -110,6 +119,29 @@ ActiveAdmin.register User do
        
       end
     end
+
+    
+    panel "Order history" do
+      table_for resource.orders do
+        column :reference_number do |item|
+          link_to item.reference_number, admin_order_path(item)
+        end
+        column :user do |order|
+          link_to order.user.name, admin_user_path(order.user)
+        end
+        # column :quantity do |item|
+        #   item.order_items.where(product_id: resource.id).first&.quantity
+        # end
+        column :status do |item|
+          status_tag item.status
+        end
+        column :created_at
+        column :price do |item|
+          format_currency item.price
+        end
+      end
+    end
+
   end
 
 end

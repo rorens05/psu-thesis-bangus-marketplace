@@ -1,16 +1,16 @@
 ActiveAdmin.register AdminUser, as: "Admins" do
+  config.filters = false 
   menu priority: 11
-  permit_params :email, :name, :role, :status, :password, :password_confirmation, :image
+  permit_params :email, :name, :role, :status, :password, :password_confirmation, :image, :address
 
   index do
     selectable_column
-    id_column
     column :email
     column :name
     column :role
-    column :status
-    column :current_sign_in_at
-    column :sign_in_count
+    column :status do |user|
+      status_tag user.status
+    end
     column :created_at
     actions
   end
@@ -27,12 +27,27 @@ ActiveAdmin.register AdminUser, as: "Admins" do
       f.input :image, as: :file
       f.input :email
       f.input :name
+      f.input :address
       f.input :role
       f.input :status
       f.input :password
       f.input :password_confirmation
     end
     f.actions
+  end
+
+  show do
+    panel "General Information" do
+      attributes_table_for resource do
+        row :email
+        row :name
+        row :address
+        row :role
+        row :status
+        row :created_at
+        row :updated_at
+      end
+    end
   end
 
 end

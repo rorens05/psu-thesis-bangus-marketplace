@@ -24,11 +24,6 @@
                   include_blank: false,
                   collection: User.genders.keys,
                   autofocus: true %>
-        <%= f.input :user_type,
-                  as: :select,
-                  include_blank: false,
-                  collection: User.user_types.keys,
-                  autofocus: true %>
         <%= f.input :address,
                   autofocus: true,
                   required: true %>

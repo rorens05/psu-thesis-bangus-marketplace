@@ -6,19 +6,28 @@
         <button type="submit" class="btn btn-primary mx-2" >Search</button>
       </div>
     </form> %>
-    <div class="container border shadow rounded m-2 p-4" style="display: flex; align-items: center; background-color: #5496ff">
-      <img src="/images/banner.jpg" style="width: 300px; margin-right: 24px">
-      <h1 class="h3">
-        “Fish is held out to be one of the greatest luxuries of the table and not only necessary, but even indispensable at all dinners where there is any pretense of excellence or fashion.” – Isabella Beeton
-        <br/>
-        <a href="/products" type="submit"
-         name="commit" value="ADD TO CART" class="btn d-inline-block mt-3 btn btn-light text-decoration-none font-weight-bold" data-disable-with="ADD TO CART">ADD TO CART NOW!</a>
-      </h1>
+    <div class="container border shadow rounded m-2 p-4" style="background-color: #5496ff">
+      <div class="bg-white" style="display: flex; ">
+        <img src="/images/landing-image.jpg" style="width: 47%; margin-right: 24px">
+        <div class="landing-message" style="flex: 1; padding-top: 16px; padding-right: 16px; margin-left: -20px">
+          <p style="text-align: right; margin-bottom: 80px">
+            <img src="/images/logo.jpg" style="width: 80px; height: 80px">
+            <span style="font-size: 26px; font-weight: bold; color: #004AAD">Malinamnam Fish Products</span>
+          </p>
+          <p style="font-size: 30px; font-weight: bold; letter-spacing: 2px; color: #56789D">START YOUR BUSINESS WITH US</p>
+          <p style="font-size: 70px; font-weight: bold; line-height: 60px; color: #004AB3; font-family: peace_sans">GUARANTED FRESH DAILY</p>
+          <p style="font-size: 30px; font-weight: bold; letter-spacing: 2px; color: #56789D">WHAT ARE YOU WAITING FOR</p>
+          <p class="mt-5">
+            <a href="/products" type="submit"
+            name="commit" value="ADD TO CART" style="display: inline-block; margin-left: 100px; font-size: 30px; background-color: #004AAD !important; padding: 23px 50px !important" class="btn rounded-pill mt-3 btn btn-primary text-decoration-none font-weight-bold" data-disable-with="ADD TO CART">SHOP NOW</a>
+          </p>
+        </div>
+      </div>
     </div>
     <div class="border shadow rounded m-2 mt-4 p-4">
-      <h1 class="h3">Products</h1>
+      <h1 class="h3">New Products</h1>
       <div class="container grid-container ">
-        <% Product.all.limit(4).each do |product| %>
+        <% Product.all.order(created_at: :desc).limit(4).each do |product| %>
           <a href="/products/<%= product.id %>" class="card-link text-reset text-decoration-none">
             <div class="card" style="">
               <% if product.image.attached? %>
@@ -28,19 +37,51 @@
               <% end %>
               <div class="card-body d-flex flex-column justify-content-between" style="height: 180px">
                 <div>
-                  <h5 class="card-title h5"><%= product.name %></h5>
-                  <p class="card-text"><%= product.description %></p>
+                  <h5 class="card-title h5 product-title"><%= product.name %></h5>
+                  <p class="card-text product-description"><%= product.description %></p>
+                  <% if product.category.present? %>
+                    <span class="status_tag <%= product.category %>"><%= product.category.titleize %></span>
+                  <% end %>
                 </div>
-                <p class="card-text h4 text-danger"><%= format_currency current_user.user_type == "individual" ? product.price : product.wholesale_price %></p>
+                <p class="card-text h4 text-danger"><%= format_currency product.price %></p>
               </div>
             </div>
           </a>
         <% end %>
-        <a href="/products">View more</a>
       </div>
+      <a href="/products">View more</a>
     </div>
-    <%# <div class="border shadow rounded m-2 mt-4 p-4">
-      <h1 class="h3">Services</h1>
-    </div> %>
+    <% Product.categories.keys.each do |category| %>
+      <% products = Product.all.where(category: category) %>
+      <% if products.count.positive? %>
+        <div class="border shadow rounded m-2 mt-4 p-4">
+          <h1 class="h3"><%= category.titleize %></h1>
+          <div class="container grid-container ">
+            <% products.order(created_at: :desc).limit(4).each do |product| %>
+              <a href="/products/<%= product.id %>" class="card-link text-reset text-decoration-none">
+                <div class="card" style="">
+                  <% if product.image.attached? %>
+                    <%= image_tag product.image, class: 'card-img-top' %>
+                  <% else %>
+                    <%= image_tag '/images/no-image.png', class: 'card-img-top' %>
+                  <% end %>
+                  <div class="card-body d-flex flex-column justify-content-between" style="height: 180px">
+                    <div>
+                      <h5 class="card-title h5 product-title"><%= product.name %></h5>
+                      <p class="card-text product-description"><%= product.description %></p>
+                      <% if product.category.present? %>
+                        <span class="status_tag <%= product.category %>"><%= product.category.titleize %></span>
+                      <% end %>
+                    </div>
+                    <p class="card-text h4 text-danger"><%= format_currency product.price %></p>
+                  </div>
+                </div>
+              </a>
+            <% end %>
+          </div>
+          <a href="/products">View more</a>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

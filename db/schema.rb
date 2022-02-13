@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_30_131503) do
+ActiveRecord::Schema.define(version: 2022_02_09_064603) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_12_30_131503) do
     t.string "name"
     t.integer "role", default: 0
     t.integer "status", default: 0
+    t.string "address"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -119,6 +120,16 @@ ActiveRecord::Schema.define(version: 2021_12_30_131503) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "product_stocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.integer "quantity"
+    t.bigint "admin_user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_user_id"], name: "index_product_stocks_on_admin_user_id"
+    t.index ["product_id"], name: "index_product_stocks_on_product_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -128,6 +139,7 @@ ActiveRecord::Schema.define(version: 2021_12_30_131503) do
     t.integer "stocks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "category"
   end
 
   create_table "provinces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -219,6 +231,8 @@ ActiveRecord::Schema.define(version: 2021_12_30_131503) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_stocks", "admin_users"
+  add_foreign_key "product_stocks", "products"
   add_foreign_key "provinces", "regions"
   add_foreign_key "reviews", "products"
   add_foreign_key "reviews", "users"
