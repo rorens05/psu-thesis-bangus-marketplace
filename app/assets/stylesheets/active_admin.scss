@@ -393,6 +393,15 @@
   }
 }
 
+.panel {
+  padding-top: 16px;
+  h3 {
+    padding-bottom: 0px !important;
+    padding-top: 12px !important;
+    font-size: 24px;
+  }
+}
+
 @media print {
   /* All your print styles go here */
   .print-hidden {
