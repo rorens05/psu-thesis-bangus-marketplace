@@ -13,4 +13,11 @@ class ApplicationController < ActionController::Base
   ])
   end
 
+  def authenticate_current_admin_user_with_otp!
+    return if controller_name == "otp_authentications" || controller_name == "sessions" || current_admin_user.otp_authenticated?
+
+    redirect_to(admin_otp_page_path)
+  end
+
+
 end

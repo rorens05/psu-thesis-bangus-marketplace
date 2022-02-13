@@ -68,14 +68,23 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  # config.action_mailer.smtp_settings = {
+  #   address: 'zimbra-server.bliimo.com',
+  #   port: 465,
+  #   domain: 'bliimotechnologies.com',
+  #   authentication: 'plain',
+  #   tls: true,
+  #   user_name: 'dev-test-email@bliimotechnologies.com',
+  #   password: 'ehfcejqtaiendntf',
+  #   enable_starttls_auto: true
+  # }
+
   config.action_mailer.smtp_settings = {
-    address: 'zimbra-server.bliimo.com',
-    port: 465,
-    domain: 'bliimotechnologies.com',
-    authentication: 'plain',
-    tls: true,
-    user_name: 'dev-test-email@bliimotechnologies.com',
-    password: 'wZV2frghc68XmEvC',
-    enable_starttls_auto: true
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => "thesisemailnoreply@gmail.com",
+    :password             => "ehfcejqtaiendntf",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
   }
 end

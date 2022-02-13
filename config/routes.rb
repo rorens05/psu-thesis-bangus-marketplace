@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   post 'profile/update_password'
   get '/message' => 'message#index'
   post '/message/create' => 'message#create'
+  devise_scope :admin_user do
+    get '/admin/otp', to: 'admin_users/sessions/otp_authentications#new', as: :admin_otp_page
+    post '/admin/otp', to: 'admin_users/sessions/otp_authentications#create', as: :admin_verify_otp
+  end
   devise_for :admin_users, ActiveAdmin::Devise.config
+
   ActiveAdmin.routes(self)
   resources :mobile_releases
   resources :notifications
@@ -69,6 +74,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'confirm_email/:token', to: 'email_handler#confirm_email'
+
+
 
   namespace :api do
     namespace :v2 do
