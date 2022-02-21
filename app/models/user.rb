@@ -94,6 +94,22 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+
+  OTP_AUTH_EXPIRES_IN = 24.hours
+  has_one_time_password
+
+  def send_otp_mail
+    Rails.logger.info "Sending OTP mail to #{email}"
+    Rails.logger.info "Sending OTP: #{otp_code}"
+    AdminMailer.user_otp(email, otp_code).deliver_now
+  end
+
+  def otp_authenticated?
+    return unless otp_auth_at?
+
+    otp_auth_at + OTP_AUTH_EXPIRES_IN > Time.zone.now
+  end
+
   private
 
   def generate_confirmation_token

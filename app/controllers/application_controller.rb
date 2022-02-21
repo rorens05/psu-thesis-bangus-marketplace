@@ -23,4 +23,14 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def authenticate_current_user_with_otp!
+
+    return if current_user.blank? || controller_name == "otp_authentications" || 
+              devise_controller? ||
+              current_user&.otp_authenticated?
+
+    redirect_to(user_otp_page_path)
+  end
+
+
 end

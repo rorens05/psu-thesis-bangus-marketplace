@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, except: [:index, :about]
+  before_action :authenticate_current_user_with_otp!, except: [:about]
   layout 'dashboard'
 
   def index;

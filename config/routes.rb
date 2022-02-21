@@ -57,7 +57,11 @@ Rails.application.routes.draw do
   get 'profile/edit_profile'
   post 'profile/update_profile'
   patch 'profile/update_password'
+  get '/users/otp', to: 'users_otp/sessions/otp_authentications#new', as: :user_otp_page
+  post '/users/otp', to: 'users_otp/sessions/otp_authentications#create', as: :user_verify_otp
+
   devise_for :users
+  
   get 'users/:id' => 'users#show'
   get 'products/:id' => 'home#products', as: :home_product
   get 'cart' => 'home#cart', as: :home_cart
